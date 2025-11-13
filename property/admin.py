@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat, complaint
+from .models import Flat, Complaint, Owner
 
 
 class HausAdmin(admin.ModelAdmin):
@@ -12,11 +12,15 @@ class HausAdmin(admin.ModelAdmin):
         'price',
         'construction_year',
         'new_building',
+        'phone',
+        'owner_pure_phone',
+
     )
     list_editable = ['new_building']
     list_filter = ['new_building']
     raw_id_fields = ["how_much_like"]
 
-admin.site.register(complaint)
+admin.site.register(Complaint)
 admin.site.register(Flat, HausAdmin)
+admin.site.register(Owner)
 
