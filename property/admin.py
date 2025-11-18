@@ -18,8 +18,6 @@ class HausAdmin(admin.ModelAdmin):
         'price',
         'construction_year',
         'new_building',
-        'phone',
-        'owner_pure_phone',
 
     )
     list_editable = ['new_building']
