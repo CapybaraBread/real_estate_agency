@@ -12,7 +12,7 @@ def link_flats_to_owners(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator(chunk_size=1000):
         # Старые поля в модели Flat
         raw_name = getattr(flat, 'owner', None)
         raw_phone = getattr(flat, 'owners_phonenumber', None)
@@ -50,8 +50,8 @@ def unlink_flats_from_owners(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for owner in Owner.objects.all():
-        for flat in owner.flats.all():
+    for owner in Owner.objects.all().iterator(chunk_size=1000):
+        for flat in owner.flats.all().iterator(chunk_size=1000):
             # Ничего не перезатираем, если там уже что-то руками написано
             if hasattr(flat, 'owner') and not getattr(flat, 'owner', None):
                 flat.owner = owner.name

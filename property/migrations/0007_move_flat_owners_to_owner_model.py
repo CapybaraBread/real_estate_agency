@@ -7,7 +7,7 @@ def move_owners_forward(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator(chunk_size=1000):
         if not flat.owner:
             continue
 
