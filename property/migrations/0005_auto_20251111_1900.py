@@ -27,9 +27,9 @@ def _normalize_first_valid(raw: str, default_region: str = "RU"):
 
 def forwards(apps, schema_editor):
     Flat = apps.get_model("property", "Flat")
-    qs = Flat.objects.all().only("id", "phone", "owner_pure_phone").iterator(chunk_size=1000)
+    flats_iter = Flat.objects.all().only("id", "phone", "owner_pure_phone").iterator(chunk_size=1000)
     to_update = []
-    for obj in qs:
+    for obj in flats_iter:
         normalized = _normalize_first_valid(obj.phone, "RU")
         if normalized and obj.owner_pure_phone != normalized:
             obj.owner_pure_phone = normalized
