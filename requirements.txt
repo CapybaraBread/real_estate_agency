@@ -1,10 +1,6 @@
 Django==5.2.*
 environs==14.2.*
 dj-database-url==3.0.*
-asgiref==3.10.0.*
-dj-database-url==3.0.1.*
 python-dotenv==1.2.1.*
 django-phonenumber-field==8.3.0.*
 phonenumbers==9.0.17.*
-marshmallow==4.0.1.*
-sqlparse==0.5.3.*   
